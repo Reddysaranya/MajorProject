@@ -1,0 +1,918 @@
+{% load static %}
+<!--#fb5849-->
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8" />
+    <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+<script>
+    function loadGoogleTranslate() {
+        new google.translate.TranslateElement("google_element");
+    }
+</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <title>Fight Famishment</title>
+<!--
+    
+TemplateMo 558 Klassy Cafe
+
+https://templatemo.com/tm-558-klassy-cafe
+
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/templatemo-klassy-cafe.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+       .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(9, 1, 1, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.position-relative:hover .overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  color: #fff;
+  font-weight: bold;
+ 
+}
+
+.overlay-content h4 {
+    color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.overlay-content p {
+    color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.overlay-content i {
+    color: #fff;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 10px;
+}
+.linkedin-icon {
+  color: #fff; /* Customize the color as desired */
+  font-size: 24px;
+  transition: color 0.3s;
+}
+
+.linkedin-icon:hover {
+  color: #fff; /* Customize the hover color as desired */
+}
+
+
+/*Reservation fake */
+#reservations .section-heading {
+  margin-bottom: 30px;
+}
+
+#reservations .section-heading h6 {
+  color: #fff;
+}
+
+#reservations .section-heading h2 {
+  color: #fff;
+  font-weight: 700;
+}
+
+#reservations .section-heading h6:before {
+  background-color: #fff;
+}
+
+#reservations p {
+  color: #000;
+}
+
+#reservations {
+  margin-top: 120px;
+  padding: 40px 0px;
+  background-image: url(static/images/reservation-bg.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#reservations .phone,
+#reservations .message {
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  padding: 0px 0px 20px 0px;
+}
+
+#reservations .phone i,
+#reservations .message i {
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  text-align: center;
+  line-height: 70px;
+  color: #fff;
+  background-color: #fb5849;
+  border-radius: 50%;
+  font-size: 24px;
+  margin-top: -35px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#reservations .phone h4,
+#reservations .message h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#reservations .phone span a,
+#reservations .message span a {
+  font-size: 14px;
+  color: #fff;
+  transition: all .3s;
+}
+
+#reservations .phone span a:hover,
+#reservations .message span a:hover {
+  color: #fb5849;
+}
+
+#contact {
+  margin-left: 30px;
+  padding: 45px 30px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+#contact h4 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 30px;
+  color: #2a2a2a;
+  margin-bottom: 30px;
+}
+
+.datepicker-days {
+  padding: 30px;
+  cursor: pointer;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  color: #2a2a2a;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  width: 100%;
+  height: 46px;
+  border-radius: 5px;
+  outline: none;
+  padding-top: 3px;
+  padding-left: 20px;
+  padding-right: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-bottom: 15px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  border-color: #fb5849;
+}
+
+.contact-form button {
+  margin-top: -10px;
+  font-size: 13px;
+  color: #fff;
+  background-color: #fb5849;
+  padding: 12px 25px;
+  width: 100%;
+  box-shadow: none;
+  border: none;
+  display: inline-block;
+  border-radius: 3px;
+  font-weight: 600;
+  transition: all .3s;
+}
+
+.contact-form button:hover {
+  opacity: .9;
+}
+
+.contact-form textarea {
+  height: 150px;
+  resize: none;
+  padding: 20px;
+}
+
+.contact-form ::-webkit-input-placeholder { /* Edge */
+  color: #2a2a2a;
+}
+
+.contact-form :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #2a2a2a;
+}
+
+.contact-form ::placeholder {
+  color: #2a2a2a;
+}
+
+
+
+
+
+
+
+
+
+footer a{
+color: aliceblue;
+}
+footer a:hover{
+color: black;
+text-decoration: underline;
+}
+
+.bgg-info{
+    margin-left: 7rem;
+}
+.footer {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 30px 30px 20px 30px;
+  color: #fff;
+  background-color: #fb5849;
+  border-top: 1px solid #e5e5e5;
+}
+
+.footer > * {
+  flex:  1 100%;
+}
+
+.footer__addr {
+  margin-right: 1.25em;
+  margin-bottom: 2em;
+}
+
+.footer__logo {
+  font-family: 'Pacifico', cursive;
+  font-weight: 400;
+  text-transform: lowercase;
+  font-size: 1.5rem;
+}
+
+.footer__addr h2 {
+  margin-top: 1.3em;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.nav__title {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: black;
+}
+
+.footer address {
+  font-style: normal;
+  color: #f6d5d5;
+}
+
+.footer__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  max-width: max-content;
+  background-color: rgb(33, 33, 33, 0.07);
+  border-radius: 100px;
+  color: #fff;
+  line-height: 0;
+  margin: 0.6em 0;
+  font-size: 1rem;
+  padding: 0 1.3em;
+}
+
+.footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer li {
+  line-height: 2em;
+}
+
+.footer a {
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+.footer__nav {
+  display: flex;
+	flex-flow: row wrap;
+}
+
+.footer__nav > * {
+  flex: 1 50%;
+  margin-right: 1.25em;
+}
+
+.nav__ul a {
+  color: #fff;
+}
+
+.nav__ul--extra {
+  column-count: 2;
+  column-gap: 1.25em;
+}
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
+}
+  
+.legal__links {
+  display: flex;
+  align-items: center;
+}
+
+.heart {
+  color: #fff;
+}
+
+@media screen and (min-width: 24.375em) {
+  .legal .legal__links {
+    margin-left: auto;
+  }
+}
+
+@media screen and (min-width: 40.375em) {
+  .footer__nav > * {
+    flex: 1;
+  }
+  
+  .nav__item--extra {
+    flex-grow: 2;
+  }
+  
+  .footer__addr {
+    flex: 1 0px;
+  }
+  
+  .footer__nav {
+    flex: 2 0px;
+  }
+}
+
+
+
+.screen {
+  position: relative;
+  background: #ffdfdf;
+  border-radius: 15px;
+  margin-top: 4rem;
+}
+
+.screen:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+  z-index: -1;
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: #fb5849;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.screen-header-left {
+  margin-right: auto;
+}
+
+.screen-header-button {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 3px;
+  border-radius: 8px;
+  background: white;
+}
+
+.screen-header-button.close {
+  background: #fb5849;
+}
+
+.screen-header-button.maximize {
+  background: #e8e925;
+}
+
+.screen-header-button.minimize {
+  background: #74c54f;
+}
+
+.screen-header-right {
+  display: flex;
+}
+
+.screen-header-ellipsis {
+  width: 3px;
+  height: 3px;
+  margin-left: 2px;
+  border-radius: 8px;
+  background: #fb5849;
+}
+
+.screen-body {
+  display: flex;
+}
+
+.screen-body-item {
+  flex: 1;
+  padding: 50px;
+}
+
+.screen-body-item.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-title {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: #fb5849;
+  font-size: 26px;
+}
+
+.app-title:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 25px;
+  height: 4px;
+  background: #fb5849;
+}
+
+.app-contact {
+  margin-top: auto;
+  font-size: 8px;
+  color: #000;
+}
+
+.app-form-group {
+  margin-bottom: 15px;
+}
+
+.app-form-group.message {
+  margin-top: 40px;
+}
+
+.app-form-group.buttons {
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.app-form-control {
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #fb5849;
+  color: #000;
+  font-size: 14px;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.app-form-control::placeholder {
+  color: #666;
+}
+
+.app-form-control:focus {
+  border-bottom-color: #ddd;
+}
+
+.app-form-button {
+  background: none;
+  border: none;
+  color: #ea1d6f;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.app-form-button:hover {
+  color: #b9134f;
+}
+
+.credits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  color: #ffa4bd;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.credits-link {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.dribbble {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+}
+
+@media screen and (max-width: 520px) {
+  .screen-body {
+    flex-direction: column;
+  }
+
+  .screen-body-item.left {
+    margin-bottom: 30px;
+  }
+
+  .app-title {
+    flex-direction: row;
+  }
+
+  .app-title span {
+    margin-right: 12px;
+  }
+
+  .app-title:after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .screen-body {
+    padding: 40px;
+  }
+
+  .screen-body-item {
+    padding: 0;
+  }
+}
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+  <header class="header-area header-sticky " >
+    <div class="container text-light "id= "google_element" >
+        <div class="row">
+            <div class="col-12 ">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="static/images/FFlogo.png" align="klassy cafe html template">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li class="scroll-to-section"><a href="/"class="active" >Home</a></li>
+                      <li class="scroll-to-section"><a href="about">About</a></li>
+                      <li class="scroll-to-section" ><a href="blog">Articles</a></li>
+                      <li class="scroll-to-section"><a href="bmi">Predict BMI</a></li>
+                       <a href="/#reservation"><button type="button" class="btn btn-dark">Check BMI</button></a>
+                      
+                      <!-- ... -->
+                  </ul>
+                    <!-- ... -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+          
+    <div class="container-fluid pt-5 mt-5">
+        <div class="container pt-5">
+          <div class="row g-5">
+            <div class="col-lg-5 pb-5 wow fadeInLeft" data-wow-delay="0.1s">
+              <div class="position-relative overflow-hidden" style="min-height: 400px;">
+                <img class="position-absolute animate__animated animate__fadeInLeft" src="static/images/about_orphans.jpeg" alt="">
+              </div>
+            </div>
+            <div class="col-lg-7 wow fadeInRight" data-wow-delay="0.5s">
+              <div class="h-100">
+                <h1 class="text-center display-6 fw-bold pt-3 fadeInLeft" style="color:#000">
+                  What inspired us?
+                </h1>
+                <div class="p-4 animate__animated animate__fadeInRight">
+                  <p class="text-dark fs-6" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+                    We are dedicated to fighting malnutrition in children under the age of five,
+                    particularly in rural areas. We prioritize offering affordable and accessible meal
+                    plans to ensure that these children receive the nutrition they need to thrive. We also
+                    assess mothers and provide them with nutritionally balanced foods and recipes that are
+                    locally available.
+                  </p>
+                  <p class="text-dark fs-6 pb-5" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+                    By promoting natural alternatives to artificial nutritious foods, we aim to instill healthy
+                    eating habits and give children the best possible start in life. Our mission is to eradicate
+                    malnutrition by making nutritious meals readily available and empowering mothers to make
+                    informed choices for their children's well-being.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+ 
+
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="section" id="reservations">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 align-self-center">
+                    <div class="left-text-content">
+                        <div class="section-heading text-center text-light ">
+                            <h1>OUR FEATURES</h1>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="phone">
+                                  <i class="fas fa-calculator"></i>
+                                    <h5 class="fw-bold py-1">Assessment and Categorization</h5>
+                                  
+                                  <p class="text-left px-2">
+                                    Calculates BMI and classify individuals as underweight 
+                                    or healthy, providing valuable insights into their nutrition.
+                                    Gain a deeper understanding of your body's health and make informed decisions for overall well-being.
+
+
+
+
+                                </p>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="phone ">
+                                  <i class="fas fa-clipboard-check"></i>
+                                    <h4>Personalized Diet Plans</h4>
+                                    
+                                  
+                                    <p class="text-left px-2 py-3">
+                                        Offers tailored diet plans specifically designed for children and breastfeeding mothers,
+                                         ensuring they receive optimal 
+                                        nutrition to combat malnutrition and promote overall health. 
+</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="phone">
+                                  <i class="fas fa-newspaper"></i>
+                                    <h4>Child Health Chronicles</h4>
+                                   
+                                    <p class="text-left px-2 py-3">
+                                        Explores a wealth 
+                                        of informative articles covering various aspects of child health, including nutrition, growth 
+                                        milestones, immunity-boosting strategies,mental health and more. 
+                                  </p>
+                               
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="phone">
+                                  <i class="fas fa-walking"></i>
+                                    <h5 class="fw-bold py-1">
+                                        Yoga for Health and Well-being
+                                    </h5>
+                                  
+                                  <p class="text-left px-2">
+                                    Focuses on the benefits of yoga and excercising for children, mothers, and overall well-being,
+                                     offering practical 
+                                    guidance on incorporating excercises and yoga practises to support holistic health.
+
+
+
+
+                                </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    
+ 
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    <!-- About Start -->
+ 
+    <!-- About End -->
+
+
+
+   
+
+   <!-- Footer Start -->
+   <footer class="footer py-5">
+    <div class="footer__addr">
+      <h1 class="footer__logo">
+        <a href="/" class="logo">
+            <img src="static/images/FFlogo.png" align="klassy cafe html template">
+        </a>
+      </h1>
+      
+       <br>
+       
+    </div>
+    
+    <ul class="footer__nav ">
+      <li class="nav__item bgg-info">
+        <h2 class="nav__title">Quick Links</h2>
+  
+        <ul class="nav__ul">
+          <li>
+            <a href="/">Home</a>
+          </li>
+  
+          <li>
+            <a href="about">About</a>
+          </li>
+              
+          <li>
+            <a href="ourword">Our Word</a>
+          </li>
+          <li>
+            <a href="blog">Articles</a>
+          </li>
+       
+          
+        </ul>
+      </li>
+      
+      <li class="nav__item ">
+        <h2 class="nav__title">Social Links</h2>
+        
+        <div class="right-text-content">
+           
+            <ul >
+              
+                <li><a href="https://www.linkedin.com/in/fight-famishment-2376a8278"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://www.instagram.com/fight_famishment/?igshid=MzNlNGNkZWQ4Mg%3D%3D"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+          
+        </div>
+      </li>
+      
+     
+    </ul>
+   
+  </footer>
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/parallax/parallax.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script>
+    new WOW().init();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,475 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Tracker</title>
+   
+    <meta charset="utf-8" />
+    <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+    <script>
+        function loadGoogleTranslate() {
+            new google.translate.TranslateElement("google_element");
+        }
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <title>Fight Famishment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-klassy-cafe.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+    <style>
+        .voice-icon {
+            cursor: pointer;
+            margin-left: 10px;
+            color: #fb5849;
+        }
+
+        .voice-icon:hover {
+            color: #c03542;
+        }
+
+        .nav__ul a {
+            color: #fff;
+        }
+
+        .nav__ul--extra {
+            column-count: 2;
+            column-gap: 1.25em;
+        }
+
+        .legal {
+            display: flex;
+            flex-wrap: wrap;
+            color: #fff;
+        }
+
+        .legal__links {
+            display: flex;
+            align-items: center;
+        }
+
+        .heart {
+            color: #fff;
+        }
+
+        @media screen and (min-width: 24.375em) {
+            .legal .legal__links {
+                margin-left: auto;
+            }
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fb5849;
+            color: black;
+            margin-top:-100px;
+        }
+        
+        #container {
+            max-width: 800px;
+            margin: 0px auto;
+            margin-top:3px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fb5849;
+            font-weight:bold;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        fieldset {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #fb5849;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #c03542;
+        }
+        
+        #bmiDisplay {
+            text-align: center;
+            color: #e4485f;
+        }
+        
+        #bmiDisplay h2 {
+            margin-bottom: 5px;
+        }
+        
+        #bmiDisplay p {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        
+        /* Grid layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+        }
+        
+        /* Apply grid layout to food item divs */
+        .food-item {
+            margin-bottom: 10px;
+        }
+        /* Add this CSS to reset margins and paddings */
+        .input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group select {
+    flex: 1;
+}
+
+.input-group i {
+    margin-left: 10px; /* Space between select and icon */
+    cursor: pointer; /* Change cursor to pointer */
+    color: #fb5849; /* Color for the microphone icon */
+}
+
+
+
+    </style>
+</head>
+<body>
+    <header class="header-area header-sticky pt-0 mt-0" >
+        <div class="container text-light " >
+            <div class="row">
+                <div class="col-12 ">
+                    <nav class="main-nav">
+                        <!-- ** Logo Start ** -->
+                        <a href="/" class="logo">
+                            <img src="static/images/FFlogo.png" align="klassy cafe html template">
+                        </a>
+                        <!-- ** Logo End ** -->
+                        <!-- ** Menu Start ** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="/"class="active" >Home</a></li>
+                            <li class="scroll-to-section"><a href="about">About</a></li>
+                            <li class="scroll-to-section" ><a href="blog">Articles</a></li>
+                            <li class="scroll-to-section"><a href="bmi">Predict BMI</a></li>
+                             <a href="/#reservation"><button type="button" class="btn btn-dark">Check BMI</button></a>
+                            
+                            <!-- ... -->
+                        </ul>
+                        <!-- ... -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="section" id="reservation">
+    <div id="container">
+        <h2>Nutrition Tracker</h2>
+        
+        <form id="nutritionForm" method="post" action="{% url 'bmi_predicted' %}">
+            {% csrf_token%}
+     
+                
+                <div class="grid-container">
+                    {% csrf_token%}
+                    <div class="food-item">
+                        <label for="rice">Rice:</label>
+                        <div class="input-group">
+                        <select id="rice" name="rice">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="100">Small (100g)</option>
+                            <option value="200">Medium (200g)</option>
+                            <option value="300">Large (300g)</option>
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('rice'))"></i>
+                    </div>
+                    </div>
+                    <div class="food-item">
+                        <label for="roti">Roti/Chapati:</label>
+                        <div class="input-group">
+                        <select id="roti" name="roti">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('roti'))"></i>
+                    </div>
+                    </div>
+                    <div class="food-item">
+                        <label for="dal">Dal (lentils):</label>
+                        <div class="input-group">
+                        <select id="dal" name="dal">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="50">Small (50g)</option>
+                            <option value="100">Medium (100g)</option>
+                            <option value="150">Large (150g)</option>
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('dal'))"></i>
+                    </div>
+                    </div>
+                    <div class="food-item">
+                        <label for="eggs">Eggs/Paneer:</label>
+                        <div class="input-group">
+                        <select id="eggs" name="eggs">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="1">One serving</option>
+                            <option value="2">Two servings</option>
+                            <option value="3">Three servings</option>
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('eggs'))"></i>
+                    </div>
+                    </div>
+                    <div class="food-item">
+                        <label for="sabzi">Sabzi (vegetable curry):</label>
+                        <div class="input-group">
+                        <select id="sabzi" name="sabzi">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="1">One serving</option>
+                            <option value="2">Two servings</option>
+                            <option value="3">Three servings</option>
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('sabzi'))"></i>
+                    </div>
+                    </div>
+                    <div class="food-item">
+                        <label for="fruits">Seasonal fruits:</label>
+                        <div class="input-group">
+                        <select id="fruits" name="fruits">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="50">Small portion</option>
+                            <option value="100">Medium portion</option>
+                            <option value="150">Large portion</option>
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('fruits'))"></i>
+                    </div>
+                    </div>
+                    <div class="food-item">
+                        <label for="buttermilk">Buttermilk:</label>
+                        <div class="input-group">
+                        <select id="buttermilk" name="buttermilk">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="1">Small glass</option>
+                            <option value="2">Medium glass</option>
+                            <option value="3">Large glass</option>
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('buttermilk'))"></i>
+                    </div>
+                    </div>
+                    <div class="food-item">
+                        <label for="juice">Juice:</label>
+                        <div class="input-group">
+                        <select id="juice" name="juice">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="1">Small glass</option>
+                            <option value="2">Medium glass</option>
+                            <option value="3">Large glass</option>
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('juice'))"></i>
+                    </div>
+                    </div>
+                    <div class="input-group">
+
+                        <label for="height">Height (in cm):</label>
+                        
+                        <input type="text" id="height" name="height" placeholder="Enter height">
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('height'))"></i>
+                    </div>
+                    <div class="input-group">
+                        <label for="weight">Weight (in kg):</label>
+                        
+                        <input type="text" id="weight" name="weight" placeholder="Enter weight">
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('weight'))"></i>
+                    </div>
+                    <div class="food-item">
+                        <label for="workout">Workout in minutes: </label>
+                        <div class="input-group">
+                        <select id="workout" name="workout">
+                            <option>Select</option>
+                            <option value="0">None</option>
+                            <option value="1">30</option>
+                            <option value="2">45</option>
+                            <option value="3">60</option>
+                            
+                        </select>
+                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('workout'))"></i>
+                    </div>
+                    </div>
+                </div>
+
+<br>
+                <button type="submit">Estimate</button>
+            </fieldset>
+        </form>
+
+
+    </div>
+</section>
+<script>
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = true;
+        recognition.lang = 'en-US';
+
+        let voiceTarget; // To store the target input field
+
+        // Map for voice inputs based on field id
+        const fieldValueMap = {
+            "rice": {
+                "none": "0",
+                "small": "100",   // Small portion (100g)
+                "medium": "200",  // Medium portion (200g)
+                "large": "300"    // Large portion (300g)
+            },
+            "roti": {
+                "none": "0",
+                "one": "1",
+                "two": "2",
+                "three": "3"
+            },
+            "dal": {
+                "none": "0",
+                "small": "50",    // Small portion (50g)
+                "medium": "100",  // Medium portion (100g)
+                "large": "150"    // Large portion (150g)
+            },
+            "eggs": {
+                "none": "0",
+                "one": "1",       // One serving
+                "two": "2",       // Two servings
+                "three": "3"      // Three servings
+            },
+            "sabzi": {
+                "none": "0",
+                "one": "1",       // One serving
+                "two": "2",       // Two servings
+                "three": "3"      // Three servings
+            },
+            "fruits": {
+                "none": "0",
+                "small": "50",    // Small portion (50g)
+                "medium": "100",  // Medium portion (100g)
+                "large": "150"    // Large portion (150g)
+            },
+            "buttermilk": {
+                "none": "0",
+                "small glass": "1",
+                "medium glass": "2",
+                "large glass": "3"
+            },
+            "juice": {
+                "none": "0",
+                "small glass": "1",
+                "medium glass": "2",
+                "large glass": "3"
+            },
+            "workout": {
+                "none": "0",
+                "thirty": "1",    // 30 minutes
+                "forty five": "2",// 45 minutes
+                "sixty": "3"      // 60 minutes
+            }
+        };
+        
+        // Handle the result of the voice recognition
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript.toLowerCase().trim(); // Normalize input to lowercase
+
+            if (voiceTarget.tagName === 'SELECT') {
+                // Get the corresponding mapping for the field
+                const fieldId = voiceTarget.id;
+                const mappedValue = fieldValueMap[fieldId]?.[transcript];
+                
+                if (mappedValue !== undefined) {
+                    voiceTarget.value = mappedValue; // Set the value from the map
+                } else {
+                    console.log('Unrecognized input for field', fieldId, ':', transcript);
+                }
+            } else if (voiceTarget.tagName === 'INPUT') {
+                // If the target is an input field, directly assign the transcript value
+                voiceTarget.value = transcript;
+            }
+        };
+
+        // Function to start voice input for the target field
+        function startVoiceInput(target) {
+            voiceTarget = target;  // Set the target input field
+            recognition.start();   // Start speech recognition
+            
+        }
+
+        recognition.onend = function() {
+            // Optional: Add additional logic when speech recognition ends
+            
+
+        };
+    } else {
+        console.log('Web Speech API is not supported by this browser.');
+    }
+</script>
+
+
+
+</body>
+</html>
