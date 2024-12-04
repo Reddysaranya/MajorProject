@@ -6,12 +6,27 @@
   <head>
 
     <meta charset="utf-8" />
-    <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
-<script>
-    function loadGoogleTranslate() {
-        new google.translate.TranslateElement("google_element");
-    }
-</script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en', // default language of your page
+          includedLanguages: 'hi,ta,te,kn,ml,mr,bn,gu,pa,ur', // only Indian languages
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+    
+      // Function to trigger the Google Translate language change
+      function changeLanguage(languageCode) {
+        const select = document.querySelector('select.goog-te-combo');
+        if (select) {
+          select.value = languageCode;
+          select.dispatchEvent(new Event('change')); // Trigger the change event to translate the page
+        }
+      }
+    </script>
+    
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -618,57 +633,130 @@ text-decoration: underline;
 
 
 
+/* Header Styling */
+.my_new-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff; /* White background for header */
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+}
 
 
 
-    </style>
+/* Navigation Links Styling */
+.my_new-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between links */
+}
+
+.my_new-nav-link {
+  text-decoration: none;
+  color: #000000; /* Black text color for links */
+  font-size: 16px;
+  font-weight: bold; /* Bold links */
+  padding: 10px 15px; /* Increase padding for top, bottom, left, and right */
+  transition: color 0.3s, background-color 0.3s;
+}
+
+/* Active and Hover Effect for Navigation Links */
+.my_new-nav-link:hover, .my_new-nav-link.active {
+  color: #fb5849; /* Active/Hover color */
+}
+
+/* Check BMI Button Styling */
+.my_new-button {
+  background-color: #000000; /* Black background for button */
+  color: #ffffff; /* White text for button */
+  padding: 10px 20px; /* Padding for top, bottom, left, and right */
+  border-radius: 20px; /* Rounded corners */
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.my_new-button:hover {
+  background-color: #fb5849; /* Hover color for button */
+}
+
+/* Google Translate Styling */
+.my_new-translate {
+  margin-left: 20px;
+}/* Active and Hover Effect for Navigation Links */
+.my_new-nav-link:hover, .my_new-nav-link.active {
+  color: #fb5849; /* Active/Hover color */
+}
+
+/* Custom Styling to Force Vertical Dropdown */
+.goog-te-menu-frame {
+  width: 200px !important;
+  height: auto !important;
+  max-height: 300px !important;
+  overflow-y: scroll !important;
+}
+
+/* Adjust dropdown container */
+.goog-te-menu-value {
+  padding: 10px 15px;
+}
+
+/* Styling for language list */
+.goog-te-menu2 {
+  display: block !important;
+  width: 150px !important;
+  position: absolute;
+}
+
+.goog-te-menu2-item {
+  display: block;
+}
+
+
+
+
+</style>
+
+
 </head>
 
 <body>
 
-  <header class="header-area header-sticky " >
-    <div class="container text-light "id= "google_element" >
-        <div class="row">
-            <div class="col-12 ">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="/" class="logo">
-                        <img src="static/images/FFlogo.png" align="klassy cafe html template">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                      <li class="scroll-to-section"><a href="/"class="active" >Home</a></li>
-                      <li class="scroll-to-section"><a href="about">About</a></li>
-                      <li class="scroll-to-section" ><a href="blog">Articles</a></li>
-                      <li class="scroll-to-section"><a href="bmi">Predict BMI</a></li>
-                       <a href="/#reservation"><button type="button" class="btn btn-dark">Check BMI</button></a>
-                      
-                      <!-- ... -->
-                  </ul>
-                    <!-- ... -->
-                </nav>
-            </div>
-        </div>
+  <header class="my_new-header">
+    <!-- Logo on the left -->
+    <div class="my_new-logo">
+        <a href="/" class="logo">
+            <img src="static/images/FFlogo.png">
+        </a>
     </div>
+
+    <!-- Navigation links on the right -->
+    <nav class="my_new-nav">
+        <a href="/" class="my_new-nav-link">Home</a>
+        <a href="about" class="my_new-nav-link">About</a>
+        <a href="blog" class="my_new-nav-link active">Articles</a>
+        <a href="bmi" class="my_new-nav-link">Predict BMI</a>
+        <a href="/#reservation" class="my_new-button">Check BMI</a>
+    </nav>
+
+    <!-- Google Translate Element -->
+    <div id="google_translate_element" class="my_new-translate"></div>
 </header>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-          
+<!-- Google Translate Script -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'hi,ta,te,kn,ml,mr,bn,gu,pa,ur',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
+</script>
+<script async type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      
     <div class="container-fluid pt-5 mt-5">
         <div class="container pt-5">
           <div class="row g-5">

@@ -1,8 +1,6 @@
 from django.db import models
 
 class recipe(models.Model):
-    
-
     recipe_name = models.CharField(max_length=100)
     people_served = models.TextField(blank=True)
     calories = models.TextField(blank=True)
