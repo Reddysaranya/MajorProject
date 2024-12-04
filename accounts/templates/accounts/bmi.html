@@ -297,6 +297,32 @@
     margin-top:-50px;
     margin-bottom:0px;
 }
+/* Style for error messages */
+.error-msg {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Style for input fields with errors */
+input:invalid, select:invalid {
+    border: 2px solid red;
+}
+
+/* Highlighting input fields with errors when focused */
+input:invalid:focus, select:invalid:focus {
+    outline: none;
+    border-color: red;
+}
+
+/* Style for required fields */
+input:required, select:required {
+    background-color: red; /* Light pink background */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -312,8 +338,8 @@
         <nav class="my_new-nav">
             <a href="/" class="my_new-nav-link">Home</a>
             <a href="about" class="my_new-nav-link">About</a>
-            <a href="blog" class="my_new-nav-link active">Articles</a>
-            <a href="bmi" class="my_new-nav-link">Predict BMI</a>
+            <a href="blog" class="my_new-nav-link ">Articles</a>
+            <a href="bmi" class="my_new-nav-link active">Predict BMI</a>
             <a href="/#reservation" class="my_new-button">Check BMI</a>
         </nav>
     
@@ -340,16 +366,14 @@
         <h2>Nutrition Tracker</h2>
         
         <form id="nutritionForm" method="post" action="{% url 'bmi_predicted' %}">
-            {% csrf_token%}
-     
-                
-                <div class="grid-container">
-                    {% csrf_token%}
-                    <div class="food-item">
-                        <label for="rice">Rice:</label>
-                        <div class="input-group">
+            {% csrf_token %}
+            
+            <div class="grid-container">
+                <div class="food-item">
+                    <label for="rice">Rice:</label>
+                    <div class="input-group">
                         <select id="rice" name="rice">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="100">Small (100g)</option>
                             <option value="200">Medium (200g)</option>
@@ -357,12 +381,14 @@
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('rice'))"></i>
                     </div>
-                    </div>
-                    <div class="food-item">
-                        <label for="roti">Roti/Chapati:</label>
-                        <div class="input-group">
+                    <div class="error-msg" id="riceError"></div>
+                </div>
+                
+                <div class="food-item">
+                    <label for="roti">Roti/Chapati:</label>
+                    <div class="input-group">
                         <select id="roti" name="roti">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -370,12 +396,14 @@
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('roti'))"></i>
                     </div>
-                    </div>
-                    <div class="food-item">
-                        <label for="dal">Dal (lentils):</label>
-                        <div class="input-group">
+                    <div class="error-msg" id="rotiError"></div>
+                </div>
+        
+                <div class="food-item">
+                    <label for="dal">Dal (lentils):</label>
+                    <div class="input-group">
                         <select id="dal" name="dal">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="50">Small (50g)</option>
                             <option value="100">Medium (100g)</option>
@@ -383,12 +411,14 @@
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('dal'))"></i>
                     </div>
-                    </div>
-                    <div class="food-item">
-                        <label for="eggs">Eggs/Paneer:</label>
-                        <div class="input-group">
+                    <div class="error-msg" id="dalError"></div>
+                </div>
+        
+                <div class="food-item">
+                    <label for="eggs">Eggs/Paneer:</label>
+                    <div class="input-group">
                         <select id="eggs" name="eggs">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="1">One serving</option>
                             <option value="2">Two servings</option>
@@ -396,12 +426,14 @@
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('eggs'))"></i>
                     </div>
-                    </div>
-                    <div class="food-item">
-                        <label for="sabzi">Sabzi (vegetable curry):</label>
-                        <div class="input-group">
+                    <div class="error-msg" id="eggsError"></div>
+                </div>
+        
+                <div class="food-item">
+                    <label for="sabzi">Sabzi (vegetable curry):</label>
+                    <div class="input-group">
                         <select id="sabzi" name="sabzi">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="1">One serving</option>
                             <option value="2">Two servings</option>
@@ -409,12 +441,14 @@
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('sabzi'))"></i>
                     </div>
-                    </div>
-                    <div class="food-item">
-                        <label for="fruits">Seasonal fruits:</label>
-                        <div class="input-group">
+                    <div class="error-msg" id="sabziError"></div>
+                </div>
+        
+                <div class="food-item">
+                    <label for="fruits">Seasonal fruits:</label>
+                    <div class="input-group">
                         <select id="fruits" name="fruits">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="50">Small portion</option>
                             <option value="100">Medium portion</option>
@@ -422,12 +456,14 @@
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('fruits'))"></i>
                     </div>
-                    </div>
-                    <div class="food-item">
-                        <label for="buttermilk">Buttermilk:</label>
-                        <div class="input-group">
+                    <div class="error-msg" id="fruitsError"></div>
+                </div>
+        
+                <div class="food-item">
+                    <label for="buttermilk">Buttermilk:</label>
+                    <div class="input-group">
                         <select id="buttermilk" name="buttermilk">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="1">Small glass</option>
                             <option value="2">Medium glass</option>
@@ -435,12 +471,14 @@
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('buttermilk'))"></i>
                     </div>
-                    </div>
-                    <div class="food-item">
-                        <label for="juice">Juice:</label>
-                        <div class="input-group">
+                    <div class="error-msg" id="buttermilkError"></div>
+                </div>
+        
+                <div class="food-item">
+                    <label for="juice">Juice:</label>
+                    <div class="input-group">
                         <select id="juice" name="juice">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="1">Small glass</option>
                             <option value="2">Medium glass</option>
@@ -448,39 +486,43 @@
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('juice'))"></i>
                     </div>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control bg-light border-2 border-dark" id="height" name="height" placeholder="Child's height in cm">
-                        <label for="height">Child's height in cm</label>
-                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('height'))"></i>
-                 
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control bg-light border-2 border-dark" id="weight" name="weight" placeholder="Child's weight in kg">
-                        <label for="weight">Child's weight in kg</label>
-                        <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('weight'))"></i>
-
-                    </div>
-                    <div class="food-item">
-                        <label for="workout">Workout in minutes: </label>
-                        <div class="input-group">
+                    <div class="error-msg" id="juiceError"></div>
+                </div>
+        
+                <div class="form-floating">
+                    <input type="number" class="form-control bg-light border-2 border-dark" id="height" name="height" placeholder="Child's height in cm" step="0.01" >
+                    <label for="height">Child's height in cm</label>
+                    <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('height'))"></i>
+                    <div class="error-msg" id="heightError"></div>
+                </div>
+        
+                <div class="form-floating">
+                    <input type="number" class="form-control bg-light border-2 border-dark" id="weight" name="weight" placeholder="Child's weight in kg" step="0.01" >
+                    <label for="weight">Child's weight in kg</label>
+                    <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('weight'))"></i>
+                    <div class="error-msg" id="weightError"></div>
+                </div>
+        
+                <div class="food-item">
+                    <label for="workout">Workout in minutes:</label>
+                    <div class="input-group">
                         <select id="workout" name="workout">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <option value="0">None</option>
                             <option value="1">30</option>
                             <option value="2">45</option>
                             <option value="3">60</option>
-                            
                         </select>
                         <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('workout'))"></i>
                     </div>
-                    </div>
+                    <div class="error-msg" id="workoutError"></div>
                 </div>
-
-<br>
-                <button type="submit">Estimate</button>
-            </fieldset>
+            </div>
+        
+            <br>
+            <button type="submit">Estimate</button>
         </form>
+        
 
 
     </div>
@@ -592,6 +634,72 @@
 </script>
 
 
+<<script>
+    // Function to validate the form
+function validateForm() {
+    let isValid = true;
+
+    // Reset error messages
+    const errorMsgs = document.querySelectorAll('.error-msg');
+    errorMsgs.forEach(msg => msg.innerHTML = "");
+
+    // Get values from fields
+    const rice = document.getElementById('rice').value;
+    const roti = document.getElementById('roti').value;
+    const dal = document.getElementById('dal').value;
+    const eggs = document.getElementById('eggs').value;
+    const sabzi = document.getElementById('sabzi').value;
+    const fruits = document.getElementById('fruits').value;
+    const buttermilk = document.getElementById('buttermilk').value;
+    const juice = document.getElementById('juice').value;
+    const height = document.getElementById('height').value;
+    const weight = document.getElementById('weight').value;
+    const workout = document.getElementById('workout').value;
+
+    // Validating food items
+    const foodItems = ['rice', 'roti', 'dal', 'eggs', 'sabzi', 'fruits', 'buttermilk', 'juice'];
+    foodItems.forEach(item => {
+        if (document.getElementById(item).value === "") {
+            document.getElementById(item + 'Error').innerHTML = "This field is mandatory.";
+            isValid = false;
+        }
+    });
+
+    // Validating height and weight
+    if (height === "") {
+        document.getElementById('heightError').innerHTML = "This field is mandatory.";
+        isValid = false;
+    } else if (isNaN(height) || height < 30 || height > 300) {
+        document.getElementById('heightError').innerHTML = "Height must be between 30 cm and 300 cm.";
+        isValid = false;
+    }
+
+    if (weight === "") {
+        document.getElementById('weightError').innerHTML = "This field is mandatory.";
+        isValid = false;
+    } else if (isNaN(weight) || weight < 2 || weight > 300) {
+        document.getElementById('weightError').innerHTML = "Weight must be between 2 kg and 300 kg.";
+        isValid = false;
+    }
+
+    // Validating workout time
+    if (workout === "") {
+        document.getElementById('workoutError').innerHTML = "This field is mandatory.";
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+// Add event listener to form submit
+document.getElementById('nutritionForm').onsubmit = function(event) {
+    event.preventDefault(); // Prevent the form from submitting until validation
+    if (validateForm()) {
+        this.submit(); // Submit the form if it's valid
+    }
+};
+
+</script>>
 
 </body>
 </html>

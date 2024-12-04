@@ -178,7 +178,7 @@ def items_home(request):
     my_data = request.GET.get('data', '')
     object_1=recipe.objects.filter(recipe_name=my_data)
     for obj in object_1:
-        return render(request,'accounts/item2.html',{'recipe_name':my_data,'ins':obj.ins,'calories':obj.calories,'people_served':obj.people_served,'difficulty':obj.difficulty, 'ing':obj.ing})
+        return render(request,'accounts/item2.html',{'recipe_name':my_data,'ins':obj.instructions,'calories':obj.calories,'people_served':obj.people_served,'difficulty':obj.difficulty, 'ing':obj.ingredients})
 
 def post1(request):
     return render(request,'accounts/post1.html')
@@ -207,8 +207,8 @@ def bmi_predicted(request):
     if request.method == 'POST':
         # Retrieve form data
         model = joblib.load('accounts/linear_regression_model.pkl')
-        height = int(request.POST['height'])
-        weight = int(request.POST['weight'])
+        height = float(request.POST['height'])
+        weight = float(request.POST['weight'])
         rice_quantity = int(request.POST['rice'])
         roti_quantity = int(request.POST['roti'])
         dal_quantity = int(request.POST['dal'])

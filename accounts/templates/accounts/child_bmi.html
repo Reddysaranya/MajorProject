@@ -393,6 +393,61 @@ text-decoration: underline;
 }
 
 
+.error-message {
+  display: block;
+  font-size: 14px;
+  color: #d9534f; /* Red color for error */
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* Highlighted Border on Invalid Fields */
+.input-field:invalid {
+  border-color: #d9534f;
+  background-color: #f8d7da; /* Light red background */
+  box-shadow: 0 0 5px rgba(217, 53, 79, 0.5); /* Subtle shadow */
+}
+
+/* Focus Style for Fields with Errors */
+.input-field:focus:invalid {
+  border-color: #d9534f;
+  outline: none;
+  box-shadow: 0 0 5px rgba(217, 53, 79, 0.8); /* More prominent shadow */
+}
+
+/* Error Message Positioning */
+.error-message {
+  font-size: 13px;
+  color: #721c24; /* Darker red */
+  margin-top: 4px;
+  padding-left: 5px;
+}
+
+/* Positioning of Error Messages Next to Fields */
+input[type="text"], input[type="number"], select {
+  position: relative;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  position: relative;
+}
+
+/* Optional: Styling for Radio Button Errors */
+input[type="radio"]:checked + label,
+input[type="radio"]:not(:checked) + label {
+  color: black; /* Change radio label color on error */
+}
+
+input[type="radio"]:focus {
+  outline-color: red; /* Highlight radio button on error */
+}
+
+
+
+select:focus:invalid {
+  border-color: #d9534f;
+  box-shadow: 0 0 5px rgba(217, 53, 79, 0.8);
+}
 </style>
     </head>
     
@@ -412,7 +467,7 @@ text-decoration: underline;
       <nav class="my_new-nav">
           <a href="/" class="my_new-nav-link">Home</a>
           <a href="about" class="my_new-nav-link">About</a>
-          <a href="blog" class="my_new-nav-link active">Articles</a>
+          <a href="blog" class="my_new-nav-link ">Articles</a>
           <a href="bmi" class="my_new-nav-link">Predict BMI</a>
           <a href="/#reservation" class="my_new-button">Check BMI</a>
       </nav>
@@ -465,14 +520,14 @@ text-decoration: underline;
                                                   <div class="input-group">
                                                     <legend style="font-weight: bold; font-size: large;">Age</legend>
                                                     <div class="form-floating">
-                                                      <input type="text" class="form-control bg-light border-2 border-dark" id="age" name="age" placeholder="Enter Age" />
+                                                      <input type="number" class="form-control bg-light border-2 border-dark" id="age" name="age" placeholder="Enter Age" min="1" max="45" required />
                                                       <label for="age">Enter Age</label>
+                                                      <span id="age-error" class="error-message" style="color: red;"></span>
                                                       <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('age'))"></i>
-                                                  </div>
-                                                  
                                                     </div>
+                                                  </div>
                                                 </fieldset>
-                                            </div>
+                                              </div>
                                             
                                             
                                               <div class="col-lg-6 col-sm-12">
@@ -481,6 +536,7 @@ text-decoration: underline;
                                                       <div class="form-floating">
                                                           <input type="text" class="form-control bg-light border-2 border-dark" id="height" name="height" placeholder="Child's height in cm">
                                                           <label for="height">Child's height in cm</label>
+                                                          <span id="height-error" class="error-message" style="color: red;"></span>
                                                           <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('height'))"></i>
                                                  
                                                       </div>
@@ -493,6 +549,7 @@ text-decoration: underline;
                                                       <div class="form-floating">
                                                           <input type="text" class="form-control bg-light border-2 border-dark" id="weight" name="weight" placeholder="Child's weight in kg">
                                                           <label for="weight">Child's weight in kg</label>
+                                                          <span id="weight-error" class="error-message" style="color: red;"></span>
                                                           <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('weight'))"></i>
                                                  
                                                       </div>
@@ -539,7 +596,7 @@ text-decoration: underline;
                                                           </select>
                                                           <label for="district">State</label>
                                                           <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('district'))"></i>
-                                                 
+                                                          <span id="district-error" class="error-message" style="color: red;"></span>
                                                       </div>
                                                       </div>
                                                   </fieldset>
@@ -556,21 +613,23 @@ text-decoration: underline;
                                                         <input class="form-check-input" type="radio" name="gender" id="female" value="female">
                                                         <label class="form-check-label" for="female">Female</label>
                                                     </div>
-                                                </fieldset>
+                                                     </fieldset>
+                                                     <span id="gender-error" class="error-message" style="color: red;"></span>
+                                              
                                             </div>
                                             
                                             <div class="col-lg-12 col-sm-12">
                                               <fieldset>
                                                 <div class="input-group">
                                                   <div class="form-floating">
-                                                      <input type="text" class="form-control bg-light border-2 border-dark" id="total_calories" name="total_calories" placeholder="Total Calories">
-                                                      <label for="total_calories">Total Kilo Calories Consumed per day</label>
-                                                      <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('total_calories'))"></i>
-                                                 
+                                                    <input type="number" class="form-control bg-light border-2 border-dark" id="total_calories" name="total_calories" placeholder="Total Calories" min="500" max="5000" required />
+                                                    <span id="total-calories-error" class="error-message" style="color: red;"></span>
+                                                    <label for="total_calories">Total Kilo Calories Consumed per day</label>
+                                                    <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('total_calories'))"></i>
                                                   </div>
-                                                  </div>
+                                                </div>
                                               </fieldset>
-                                          </div>
+                                            </div>
                                             
                                           <div class="col-lg-12 col-sm-12 mt-0 mb-1">
                                             <fieldset>
@@ -586,13 +645,15 @@ text-decoration: underline;
                                                           <option value="Super Active">Super Active(Intense exercise 6-7 times/week)</option>
                                                           <option value="Extra Active">Extra Active (Very intense exercise or training twice a day)</option>
                                                       </select>
+                                                      <span id="activity-level-error" class="error-message" style="color: red;"></span>
                                                       <i class="fas fa-microphone voice-icon" onclick="startVoiceInputForSelect('activity_level')"></i>
+                                                      
                                                   </div>
                                               </div>
                                             </fieldset>
                                         </div>
                                         <input type="hidden" id="current_date" name="current_date">
-                                            
+                                        <span id="general-error" class="error-message" style="color: red;"></span>
                                               <div class="col-lg-12 mt-3">
                                                   <fieldset>
                                                       <button type="submit" id="form-submit" class="main-button-icon">Check BMI</button>
@@ -799,9 +860,117 @@ text-decoration: underline;
     }
     
   </script>
+  <script>
+    document.getElementById('form-submit').addEventListener('click', function(event) {
+      // Prevent form submission if validation fails
+      event.preventDefault();
   
-
-
+      // Get form values
+      const age = document.getElementById('age').value;
+      const height = document.getElementById('height').value;
+      const weight = document.getElementById('weight').value;
+      const totalCalories = document.getElementById('total_calories').value;
+      const district = document.getElementById('district').value;
+      const gender = document.querySelector('input[name="gender"]:checked');
+      const activityLevel = document.getElementById('activity_level').value;
+  
+      // Initialize a flag to track form validity
+      let formIsValid = true;
+      let firstEmptyField = null; // Track the first empty field to focus on it
+  
+      // Clear previous error messages and remove red borders
+      document.querySelectorAll('.error-message').forEach(function(msg) {
+        msg.textContent = '';
+      });
+      document.querySelectorAll('.input-field').forEach(function(field) {
+        field.style.borderColor = '';
+      });
+  
+      // Check if all required fields are filled and highlight empty fields
+      if (!age) {
+        formIsValid = false;
+        document.getElementById('age').style.borderColor = 'red';
+        document.getElementById('age-error').textContent = "This field is mandatory.";
+        if (!firstEmptyField) firstEmptyField = document.getElementById('age');
+      }
+      if (!height) {
+        formIsValid = false;
+        document.getElementById('height').style.borderColor = 'red';
+        document.getElementById('height-error').textContent = "This field is mandatory.";
+        if (!firstEmptyField) firstEmptyField = document.getElementById('height');
+      }
+      if (!weight) {
+        formIsValid = false;
+        document.getElementById('weight').style.borderColor = 'red';
+        document.getElementById('weight-error').textContent = "This field is mandatory.";
+        if (!firstEmptyField) firstEmptyField = document.getElementById('weight');
+      }
+      if (!totalCalories) {
+        formIsValid = false;
+        document.getElementById('total_calories').style.borderColor = 'red';
+        document.getElementById('total-calories-error').textContent = "This field is mandatory.";
+        if (!firstEmptyField) firstEmptyField = document.getElementById('total_calories');
+      }
+      if (!district) {
+        formIsValid = false;
+        document.getElementById('district').style.borderColor = 'red';
+        document.getElementById('district-error').textContent = "This field is mandatory.";
+        if (!firstEmptyField) firstEmptyField = document.getElementById('district');
+      }
+      if (!gender) {
+        formIsValid = false;
+        document.querySelectorAll('input[name="gender"]').forEach(function(radio) {
+          radio.parentElement.style.borderColor = 'red'; // Highlight radio button container
+        });
+        document.getElementById('gender-error').textContent = "This field is mandatory.";
+        if (!firstEmptyField) firstEmptyField = document.querySelector('input[name="gender"]');
+      }
+      if (!activityLevel) {
+        formIsValid = false;
+        document.getElementById('activity_level').style.borderColor = 'red';
+        document.getElementById('activity-level-error').textContent = "This field is mandatory.";
+        if (!firstEmptyField) firstEmptyField = document.getElementById('activity_level');
+      }
+  
+      // Age validation (integer between 1 and 45)
+      if (age && (!Number.isInteger(Number(age)) || age <= 0 || age > 45)) {
+        formIsValid = false;
+        document.getElementById('age').style.borderColor = 'red';
+        document.getElementById('age-error').textContent = "Please enter a valid integer for Age between 1 and 45.";
+      }
+  
+      // Height validation (50 cm to 300 cm)
+      if (height && (height <= 0 || height < 50 || height > 300)) {
+        formIsValid = false;
+        document.getElementById('height').style.borderColor = 'red';
+        document.getElementById('height-error').textContent = "Height must be between 50 cm and 300 cm.";
+      }
+  
+      // Weight validation (2 kg to 500 kg)
+      if (weight && (weight <= 0 || weight < 2 || weight > 500)) {
+        formIsValid = false;
+        document.getElementById('weight').style.borderColor = 'red';
+        document.getElementById('weight-error').textContent = "Weight must be between 2 kg and 500 kg.";
+      }
+  
+      // Total Calories validation (500 kcal to 5000 kcal)
+      if (totalCalories && (!Number.isInteger(Number(totalCalories)) || totalCalories < 100 || totalCalories > 5000)) {
+        formIsValid = false;
+        document.getElementById('total_calories').style.borderColor = 'red';
+        document.getElementById('total-calories-error').textContent = "Total Calories must be an integer between 100 and 5000 kcal.";
+      }
+  
+      // If the form is valid, submit it
+      if (formIsValid) {
+        document.querySelector('form').submit();
+      } else {
+        // Focus on the first empty or invalid field
+        if (firstEmptyField) {
+          firstEmptyField.focus();
+        }
+      }
+    });
+  </script>
 
   </body>
 </html>
