@@ -481,7 +481,18 @@ select:focus:invalid {
   justify-content: space-between;
   margin-bottom: 10px;
 }
+.profile-row2{
+  margin:0px;
+  padding:0px;
+  background-color: #fff;
 
+}
+.profile-row2 p{
+  margin-top:30px;
+  font-size: 20px;
+  padding: 10px;
+  border:solid 2px #000;
+}
 .profile-row p {
   margin: 0;
   font-size: 18px;
@@ -518,11 +529,11 @@ select:focus:invalid {
 
   <!-- Navigation links on the right -->
   <nav class="my_new-nav">
-    <a href="/" class="my_new-nav-link active">Home</a>
+    <a href="/" class="my_new-nav-link ">Home</a>
     <a href="about" class="my_new-nav-link">About</a>
     <a href="blog" class="my_new-nav-link">Articles</a>
     <a href="bmi" class="my_new-nav-link">Predict BMI</a>
-    <a href="#reservation" class="my_new-nav-link">Check BMI</a>
+    <a href="/#reservation" class="my_new-nav-link active">Check BMI</a>
      <!-- Login Button -->
      {% if user.is_authenticated %}
      <!-- Display username and logout button if the user is logged in -->
@@ -568,7 +579,7 @@ select:focus:invalid {
               <div class="col-lg-2">
 
               </div>   
-                <div class="col-lg-8 bg-light py-5">
+                <div class="col-lg-8 bg-light pt-5">
                     <div class="contact-form ">
 
                       <div>
@@ -600,11 +611,13 @@ select:focus:invalid {
                                 </div>
                               
                                 {% endif %}
-                                <div class="profile-row m-0 p-0">
+                                <div class="profile-row">
                         {% else %}
-                            <p>Your profile details are not available. Please log in to view your profile.</p>
-                        {% endif %}
-                                </div>
+                        <div class="profile-row2 m-0 p-0">
+                          <p>Your profile details are not available. Please log in to view your profile.</p>
+                        </div>
+                          {% endif %}
+                      </div>
                       </div>
                     </div>
     </div>
@@ -613,7 +626,7 @@ select:focus:invalid {
                             {% csrf_token%}
                             <div class="row">
                               <div class="col-lg-2"></div>
-                              <div class="col-lg-8 bg-light py-5">
+                              <div class="col-lg-8 bg-light pb-5 pt-0">
                                   <div class="contact-form">
                                       <form method="post" action="{% url 'usermain' %}">
                                           {% csrf_token%}
@@ -621,7 +634,7 @@ select:focus:invalid {
                                               <div class="col-lg-12 text-center " style="color: #c03542;">
                                                 
                                                                                       
-                                                  <h3 class="pt-4 pb-5">Enter Your Details To Calculate BMI</h3>
+                                                  <h3 class="pt-0 pb-5">Enter Your Details To Calculate BMI</h3>
                                               </div>
                                               <div class="col-lg-12 col-sm-12 mt-0 mb-1">
                                                 <fieldset>

@@ -96,29 +96,19 @@ def usermain(request):
         activity_level = request.POST['activity_level']
         category = ""
 
+        # Update the profile with new details
+        if request.user.is_authenticated:
+            profile = Profile.objects.filter(user=request.user).first()
 
-        recipe.objects.filter(category="Normal").update(category="Healthy")
-        # Map the entered age to a category
-        age_category = map_age_to_category(age)
-        print("Mapped Age Category:", age_category)
-        #logger.info("Mapped Age Category: %s", age_category)
-        
+            if profile:
+                # Update the profile fields with the new data from the form
+                profile.height = height
+                profile.weight = weight
+                profile.state = district
+                profile.gender = "Male" if gender.lower() == "male" else "Female"
 
-
-        # ... existing logic remains unchanged, but replace age with age_category where needed
-        # Convert age range to average age (update this logic to use age_category)
-        if age_category != "N/A":
-            age_division = age_category.split('-')
-            age_min = float(age_division[0])
-            age_max = float(age_division[1])
-            bmr_age = (age_min + age_max) / 2
-        else:
-            bmr_age = 0  # Handle the N/A case accordingly
-        # # Convert age range to average age
-        # age_divison = age.split('-')
-        # age_min = float(age_divison[0])
-        # age_max = float(age_divison[1])
-        # bmr_age = (age_min + age_max) / 2
+                # Save the updated profile
+                profile.save()
 
         # BMI Calculation
         bmi = weight / ((height / 100) ** 2)
@@ -140,8 +130,18 @@ def usermain(request):
                 category = "Healthy"
         else:
             category = "Unknown gender"
-        print("the bmi category is : ",category)
+
         # BMR Calculation
+        age_category = map_age_to_category(age)  # Assuming you have a function that maps age to a category
+
+        if age_category != "N/A":
+            age_division = age_category.split('-')
+            age_min = float(age_division[0])
+            age_max = float(age_division[1])
+            bmr_age = (age_min + age_max) / 2
+        else:
+            bmr_age = 0  # Handle the N/A case accordingly
+
         if gender.lower() == "male":
             bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * bmr_age)
         elif gender.lower() == "female":
@@ -191,31 +191,17 @@ def usermain(request):
             calorie_message = "Unable to calculate calorie balance due to missing data."
 
         # Get current date and determine season
-        #current_date = datetime.now().date()
-        current_date = datetime(2024, 4, 15).date()
+        current_date = datetime(2024, 4, 15).date()  # Replace with actual date logic
 
-        print("\n current date is :",current_date)
+        # Call a function to get the season
         season, mal_instructions = get_season(current_date)
 
-
         # Querying database for relevant data
-        # if category == "Normal" or category == "Healthy":
-        #     category_values = ["Healthy", "Normal"]
-        # else:
-        #     category_values = [category]
-        
-        print("\ndistrict= ",district)
-        print("\ncategory= ",category)
-        print("\n age=",age_category)
         object_1 = recipe.objects.filter(district=district, category=category, age=age_category)
-        print("the recipe cat is :", object_1)
-        for obj in object_1:
-            print("Category for this recipe object:", obj.category) 
-        
         object_2 = gen_ins.objects.filter(age=age_category)
-        print("category and other values are : ",category,bmr,tdee,object_1,object_2)
+
+        # Render the template with updated context
         
-        # Render the template with additional context
         for obj in object_2:
             return render(request, 'accounts/usermain.html', {
                 'obj1': object_1,
@@ -226,10 +212,10 @@ def usermain(request):
                 'season': season,
                 'calorie_message': calorie_message,
                 'bmr': bmr,
-                'tdee': tdee  # Include the message in the context
+                'tdee': tdee,  # Include the message in the context
+                  # Send updated profile to the template
             })
-        print("\nfinal cat is :",category)
-        
+
     # Handle GET request or other logic
     return render(request, 'accounts/usermain.html')
 def items_home(request):

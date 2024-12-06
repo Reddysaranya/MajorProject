@@ -793,19 +793,31 @@ text-decoration: underline;
 				<img src="static/images/FFlogo.png">
 			</a>
 		</div>
-	
+	  
 		<!-- Navigation links on the right -->
 		<nav class="my_new-nav">
-			<a href="/" class="my_new-nav-link">Home</a>
+			<a href="/" class="my_new-nav-link ">Home</a>
 			<a href="about" class="my_new-nav-link">About</a>
 			<a href="blog" class="my_new-nav-link active">Articles</a>
 			<a href="bmi" class="my_new-nav-link">Predict BMI</a>
-			<a href="/#reservation" class="my_new-button">Check BMI</a>
-		</nav>
-	
+			<a href="/#reservation" class="my_new-nav-link">Check BMI</a>
+		   <!-- Login Button -->
+		   {% if user.is_authenticated %}
+		   <!-- Display username and logout button if the user is logged in -->
+		   <li class="my_new-button">Welcome, {{ user.username }}!</li>
+			<form action="{% url 'logout' %}" method="POST" style="display:inline;">
+			   {% csrf_token %}
+			   <button type="submit">Logout</button>
+		   </form> 
+		   {% else %}
+		   <!-- Display login button if the user is not logged in -->
+		   <li><a href="{% url 'login' %}" class="my_new-button">Login</a></li>
+		   {% endif %}
+	  </nav>
+	  
 		<!-- Google Translate Element -->
 		<div id="google_translate_element" class="my_new-translate"></div>
-	</header>
+	  </header>
 	
 	
 	<!-- Google Translate Script -->
