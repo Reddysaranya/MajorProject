@@ -1,6 +1,9 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 class recipe(models.Model):
+
     recipe_name = models.CharField(max_length=100)
     people_served = models.TextField(blank=True)
     calories = models.TextField(blank=True)
@@ -25,3 +28,12 @@ class FoodItem(models.Model):
     carbohydrates = models.FloatField()
     fats = models.FloatField()
     calories = models.FloatField()
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    height = models.FloatField()
+    weight = models.FloatField()
+    state = models.CharField(max_length=50)
+    gender = models.CharField(max_length=15, choices=[('Male', 'Male'), ('Female', 'Female')])
+    def _str_(self):
+        return self.user.username

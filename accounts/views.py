@@ -11,8 +11,18 @@ from .ml_models import train_model
 from sklearn.model_selection import train_test_split
 from datetime import datetime
 import logging
+from django.contrib.auth import login
+from .forms import RegisterForm
+from django.contrib.auth.views import LoginView, LogoutView
+from .models import Profile
+from django.urls import reverse
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
-logger = logging.getLogger(__name__)
+
 
 
 # Create your views here.
@@ -22,8 +32,56 @@ def about(request):
     return render(request,'accounts/about2.html')
 def features(request):
     return render(request,'accounts/features.html')
+
 def child_bmi(request):
-    return render(request,'accounts/child_bmi.html')
+    profile = None
+    bmi = None
+
+    if request.user.is_authenticated:
+        # Get the logged-in user's profile
+        profile = Profile.objects.filter(user=request.user).first()
+
+        if not profile:
+            return render(request, 'accounts/error.html', {"message": "Profile not found!"})
+
+        print("Profile before update:", profile.height, profile.weight)
+
+        # Handle form submission for logged-in user
+        if request.method == "POST":
+            height = request.POST.get("height")
+            weight = request.POST.get("weight")
+            state = request.POST.get("district")
+            gender = request.POST.get("gender")
+
+            # Update profile fields only if valid data is provided
+            if height:
+                profile.height = float(height)
+                print("Submitted height:", height)
+            if weight:
+                profile.weight = float(weight)
+                print("Submitted weight:", weight)
+            if state:
+                profile.state = state
+            if gender:
+                profile.gender = "M" if gender.lower() == "male" else "F"
+
+            # Save the updated profile
+            profile.save()
+
+            # Redirect to refresh the page with updated data
+            return redirect("child_bmi")
+
+        # Calculate BMI for logged-in user
+        if profile.height and profile.weight:
+            height_in_m = profile.height / 100  # Convert height to meters
+            bmi = round(profile.weight / (height_in_m ** 2), 2)
+
+    # Handle unauthenticated users
+    return render(request, "accounts/child_bmi.html", {
+        "profile": profile,
+        "bmi": bmi,
+        "message": "Please log in to view your profile details." if not profile else ""
+    })
 def blog(request):
     return render(request,'accounts/blog.html')
 def usermain(request):
@@ -324,3 +382,31 @@ def map_age_to_category(age):
             return "N/A"  # Out of defined ranges
     except ValueError:
         return "N/A"  # Handle non-integer input
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            # Save the user and associated profile
+            user = form.save()
+            print("User registered successfully!")  # Debugging
+            print(f"Username: {user.username}, Email: {user.email}")  # Debugging
+
+            # Log the user in after successful registration
+            login(request, user)
+
+            # Redirect to a home page or dashboard (adjust as needed)
+            return redirect('login')
+        else:
+            print("Form errors:", form.errors)  # Debugging
+
+    else:
+        form = RegisterForm()
+
+    return render(request, 'accounts/register.html', {'form': form})
+
+# Login view
+class CustomLoginView(LoginView):
+    template_name = 'accounts/login.html'
+
+    def get_success_url(self):
+        return reverse('home')  # Redirect to home page after successful login

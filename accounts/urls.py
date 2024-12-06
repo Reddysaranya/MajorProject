@@ -2,15 +2,16 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from django.urls import include, path
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('', views.home),
+path('', views.home,name='home'),
     path('about',views.about),
     path('home', views.home),
     path('features', views.features),
     path('usermain',views.usermain,name='usermain'),
     path('items_home',views.items_home,name='items_home'),
-    path('child_bmi', views.child_bmi),
+    path('child_bmi', views.child_bmi , name='child_bmi'),
     path('blog',views.blog),
     path('post1',views.post1),
     path('post2',views.post2),
@@ -24,4 +25,7 @@ urlpatterns = [
     path('yoga4',views.yoga4),
     path('bmi', views.bmi),
     path('bmi_predicted',views.bmi_predicted ,name="bmi_predicted"),
+    path('register/', views.register, name='register'),
+    path('login/', views.CustomLoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 ]

@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/templatemo-klassy-cafe.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            background-image: url("{% static 'images/us_bg1.png' %}");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        h2 {
+            text-align: center;
+            color: #000000;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+      
+
+        form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #fb5849;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #e14a3f;
+        }
+
+        form p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        form a {
+            color: #fb5849;
+            text-decoration: none;
+        }
+
+        form a:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #fb5849; /* Bright red for errors */
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border: 1px solid #fb5849;
+            background-color: #fff5f5;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .error-icon {
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #28a745;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .reservations {
+            padding: 80px 0px;
+            height:100vh;
+          }
+    </style>
+</head>
+<body>
+    <div class="reservations">
+        
+        <form method="post">
+            {% csrf_token %}
+            <h2>LOGIN</h2>
+
+            <!-- Display Non-Field Errors -->
+            <div>
+                {% if form.non_field_errors %}
+                <div class="error">
+                    <span class="error-icon">❗</span> <!-- Exclamation mark -->
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Display Field Errors -->
+            <div>
+                {% for field in form %}
+                    <div>
+                        {% if field.errors %}
+                        <div class="error">
+                            <span class="error-icon">❗</span> <!-- Exclamation mark -->
+                            {{ field.errors }}
+                        </div>
+                        {% endif %}
+                        {{ field.label_tag }}
+                        {{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type="submit">Login</button>
+            <br>
+            <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+        </form>
+    </div>
+
+    
+</body>
+</html>

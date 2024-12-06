@@ -1,0 +1,287 @@
+{% load static %}
+
+<form method="post" id="registration-form">
+    <h2>REGISTER</h2>
+    {% csrf_token %}
+    <div class="row">
+        <!-- Username Field -->
+        <div class="col-12">
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                {{ form.username }}
+                <small class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+                {% if form.username.errors %}
+                    <small class="form-text text-danger">{{ form.username.errors }}</small>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="col-6">
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+                {{ form.password1 }}
+                <small class="form-text text-muted">Your password can’t be too similar to your other personal information. Your password must contain at least 8 characters. Your password can’t be a commonly used password. Your password can’t be entirely numeric.</small>
+               <br>
+               {% if form.password1.errors %}
+            <ul class="errorlist text-danger">
+                {% for error in form.password1.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+            </div>
+        </div>
+
+        <!-- Password Confirmation Field -->
+        <div class="col-6">
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+                {{ form.password2 }}
+                <small class="form-text text-muted">Enter the same password as before, for verification.</small>
+                <br>
+                {% if form.password1.value != form.password2.value %}
+                    <small class="form-text  text-danger">{{ form.password2.errors }}</small>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <!-- Height and Weight Fields -->
+        <div class="col-6">
+            <div class="form-group">
+                <label for="{{ form.height.id_for_label }}">{{ form.height.label }}</label>
+                {{ form.height }}
+                {% if form.height.errors %}
+                    <small class="form-text  text-danger">{{ form.height.errors }}</small>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="form-group">
+                <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
+                {{ form.weight }}
+                {% if form.weight.errors %}
+                    <small class="form-text  text-danger">{{ form.weight.errors }}</small>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- State Field -->
+<!-- State Field (Dropdown) -->
+<div class="col-6">
+    <div class="form-group">
+        <label for="state">State</label>
+        <select name="state" id="state" class="form-control" required>
+            <option value="">Select your state</option>
+            <option value="Andhra Pradesh" {% if request.POST.state == "Andhra Pradesh" %}selected{% endif %}>Andhra Pradesh</option>
+            <option value="Arunachal Pradesh" {% if request.POST.state == "Arunachal Pradesh" %}selected{% endif %}>Arunachal Pradesh</option>
+            <option value="Assam" {% if request.POST.state == "Assam" %}selected{% endif %}>Assam</option>
+            <option value="Bihar" {% if request.POST.state == "Bihar" %}selected{% endif %}>Bihar</option>
+            <option value="Chhattisgarh" {% if request.POST.state == "Chhattisgarh" %}selected{% endif %}>Chhattisgarh</option>
+            <option value="Goa" {% if request.POST.state == "Goa" %}selected{% endif %}>Goa</option>
+            <option value="Gujarat" {% if request.POST.state == "Gujarat" %}selected{% endif %}>Gujarat</option>
+            <option value="Haryana" {% if request.POST.state == "Haryana" %}selected{% endif %}>Haryana</option>
+            <option value="Himachal Pradesh" {% if request.POST.state == "Himachal Pradesh" %}selected{% endif %}>Himachal Pradesh</option>
+            <option value="Jharkhand" {% if request.POST.state == "Jharkhand" %}selected{% endif %}>Jharkhand</option>
+            <option value="Karnataka" {% if request.POST.state == "Karnataka" %}selected{% endif %}>Karnataka</option>
+            <option value="Kerala" {% if request.POST.state == "Kerala" %}selected{% endif %}>Kerala</option>
+            <option value="Madhya Pradesh" {% if request.POST.state == "Madhya Pradesh" %}selected{% endif %}>Madhya Pradesh</option>
+            <option value="Maharashtra" {% if request.POST.state == "Maharashtra" %}selected{% endif %}>Maharashtra</option>
+            <option value="Manipur" {% if request.POST.state == "Manipur" %}selected{% endif %}>Manipur</option>
+            <option value="Meghalaya" {% if request.POST.state == "Meghalaya" %}selected{% endif %}>Meghalaya</option>
+            <option value="Mizoram" {% if request.POST.state == "Mizoram" %}selected{% endif %}>Mizoram</option>
+            <option value="Nagaland" {% if request.POST.state == "Nagaland" %}selected{% endif %}>Nagaland</option>
+            <option value="Odisha" {% if request.POST.state == "Odisha" %}selected{% endif %}>Odisha</option>
+            <option value="Punjab" {% if request.POST.state == "Punjab" %}selected{% endif %}>Punjab</option>
+            <option value="Rajasthan" {% if request.POST.state == "Rajasthan" %}selected{% endif %}>Rajasthan</option>
+            <option value="Sikkim" {% if request.POST.state == "Sikkim" %}selected{% endif %}>Sikkim</option>
+            <option value="Tamil Nadu" {% if request.POST.state == "Tamil Nadu" %}selected{% endif %}>Tamil Nadu</option>
+            <option value="Telangana" {% if request.POST.state == "Telangana" %}selected{% endif %}>Telangana</option>
+            <option value="Tripura" {% if request.POST.state == "Tripura" %}selected{% endif %}>Tripura</option>
+            <option value="Uttar Pradesh" {% if request.POST.state == "Uttar Pradesh" %}selected{% endif %}>Uttar Pradesh</option>
+            <option value="Uttarakhand" {% if request.POST.state == "Uttarakhand" %}selected{% endif %}>Uttarakhand</option>
+            <option value="West Bengal" {% if request.POST.state == "West Bengal" %}selected{% endif %}>West Bengal</option>
+            <option value="Andaman and Nicobar Islands" {% if request.POST.state == "Andaman and Nicobar Islands" %}selected{% endif %}>Andaman and Nicobar Islands</option>
+            <option value="Chandigarh" {% if request.POST.state == "Chandigarh" %}selected{% endif %}>Chandigarh</option>
+            <option value="Dadra and Nagar Haveli and Daman and Diu" {% if request.POST.state == "Dadra and Nagar Haveli and Daman and Diu" %}selected{% endif %}>Dadra and Nagar Haveli and Daman and Diu</option>
+            <option value="Delhi" {% if request.POST.state == "Delhi" %}selected{% endif %}>Delhi</option>
+            <option value="Lakshadweep" {% if request.POST.state == "Lakshadweep" %}selected{% endif %}>Lakshadweep</option>
+            <option value="Puducherry" {% if request.POST.state == "Puducherry" %}selected{% endif %}>Puducherry</option>
+            <option value="Ladakh" {% if request.POST.state == "Ladakh" %}selected{% endif %}>Ladakh</option>
+            <option value="Jammu and Kashmir" {% if request.POST.state == "Jammu and Kashmir" %}selected{% endif %}>Jammu and Kashmir</option>
+        </select>
+    </div>
+</div>
+
+
+
+
+        <!-- Gender Field -->
+        <div class="col-6">
+            <div class="form-group">
+                <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+                {{ form.gender }}
+                {% if form.gender.errors %}
+                    <small class="form-text  text-danger">{{ form.gender.errors }}</small>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="submit-button">Register</button>
+
+    <br>
+    <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; font-family: Arial, sans-serif;">Already have an account? <a href="{% url 'login' %}" style="color: #fb5849; text-decoration: none;">Login</a></p>
+</form>
+
+
+
+<style>
+    .text-danger{
+        color:red;
+        font-weight: bold;
+    }
+    body{
+        background-image: url("{% static 'images/us_bg1.png' %}");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    /* Form container styling */
+    #registration-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 50px auto;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Form heading styling */
+    #registration-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: Arial, sans-serif;
+        color: #000000;
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    /* Row container styling */
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    /* Column styling */
+    .col-6 {
+        width: 48%; /* Adjust width to fit 2 fields per row */
+    }
+
+    .col-12 {
+        width: 100%; /* Full-width columns for fields like 'Username', 'State', and 'Gender' */
+    }
+
+    /* Form Group Styling */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    /* Label Styling */
+    label {
+        font-size: 1rem;
+        margin-bottom: 5px;
+        display: block;
+        color: #333;
+    }
+
+    /* Input Fields Styling */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    select,
+    textarea,
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    /* Focus effect on input fields */
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #fb5849;
+        outline: none;
+    }
+
+    /* Small Text (instructions) Styling */
+    .form-text.text-muted {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-top: 5px;
+    }
+
+    /* Button Styling */
+    .submit-button {
+        width: 100%;
+        padding: 12px;
+        background-color: #fb5849;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Button Hover Effect */
+    .submit-button:hover {
+        background-color: #e14a3f;
+    }
+</style>
+
+
+<!-- JavaScript to handle form validation and display errors in the modal -->
+<script>
+    // Function to show the modal with error messages
+    function showModal(errors) {
+        var modal = document.getElementById('error-modal');
+        var errorList = document.getElementById('error-list');
+
+        // Clear any previous errors
+        errorList.innerHTML = '';
+
+        // Loop through the errors and display them in the list
+        errors.forEach(function(error) {
+            var li = document.createElement('li');
+            li.textContent = error;
+            errorList.appendChild(li);
+        });
+
+        // Show the modal
+        modal.style.display = "block";
+    }
+
+    // Close the modal when the close button is clicked
+    document.querySelector('.close-btn').onclick = function() {
+        document.getElementById('error-modal').style.display = "none";
+    }
+
+    // Show modal if there are any errors passed from the server (in the context of form submission)
+    {% if form.errors %}
+        var errors = [];
+        {% for field, error in form.errors.items %}
+            {% for e in error %}
+                errors.push("{{ e|escapejs }}");
+            {% endfor %}
+        {% endfor %}
+        showModal(errors);
+    {% endif %}
+</script>
