@@ -191,8 +191,8 @@ def usermain(request):
             calorie_message = "Unable to calculate calorie balance due to missing data."
 
         # Get current date and determine season
-        current_date = datetime(2024, 4, 15).date()  # Replace with actual date logic
-
+        #current_date = datetime(2024, 9, 15).date()  # Replace with actual date logic
+        current_date = datetime.now().date()
         # Call a function to get the season
         season, mal_instructions = get_season(current_date)
 

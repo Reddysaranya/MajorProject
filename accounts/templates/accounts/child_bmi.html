@@ -644,6 +644,7 @@ select:focus:invalid {
                                                       <input type="text" class="form-control bg-light border-2 border-dark" id="age" name="age" placeholder="Enter Age" />
                                                       <label for="age">Enter Age</label>
                                                       <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('age'))"></i>
+                                                      <span id="age-error" class="error-message" style="color: red;"></span>
                                                   </div>
                                                   
                                                     </div>
@@ -657,8 +658,8 @@ select:focus:invalid {
                                                       <div class="form-floating">
                                                           <input type="text" class="form-control bg-light border-2 border-dark" id="height" name="height" placeholder="User's height in cm" value="{% if profile %}{{ profile.height }}{% endif %}">
                                                           <label for="height">User's height in cm</label>
+                                                          <span id="height-error" class="error-message" style="color: red;"></span>
                                                           <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('height'))"></i>
-                                                 
                                                       </div>
                                                       </div>
                                                   </fieldset>
@@ -669,9 +670,9 @@ select:focus:invalid {
                                                       <div class="form-floating">
                                                           <input type="text" class="form-control bg-light border-2 border-dark" id="weight" name="weight" placeholder="User's weight in kg" value="{% if profile %}{{ profile.weight }}{% endif %}">
                                                           <label for="weight">User's weight in kg</label>
+                                                          <span id="weight-error" class="error-message" style="color: red;"></span>                                                      
                                                           <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('weight'))"></i>
-                                                 
-                                                      </div>
+                                                        </div>
                                                       </div>
                                                   </fieldset>
                                               </div>
@@ -714,8 +715,8 @@ select:focus:invalid {
                                                               <!-- Add other state options -->
                                                           </select>
                                                           <label for="district">State</label>
+                                                          <span id="district-error" class="error-message" style="color: red;"></span>
                                                           <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('district'))"></i>
-                                                 
                                                       </div>
                                                       </div>
                                                   </fieldset>
@@ -733,6 +734,7 @@ select:focus:invalid {
                                                         <label class="form-check-label" for="female">Female</label>
                                                     </div>
                                                 </fieldset>
+                                                <span id="gender-error" class="error-message" style="color: red;"></span>
                                             </div>
                                             
                                             <div class="col-lg-12 col-sm-12">
@@ -741,9 +743,8 @@ select:focus:invalid {
                                                   <div class="form-floating">
                                                       <input type="text" class="form-control bg-light border-2 border-dark" id="total_calories" name="total_calories" placeholder="Total Calories">
                                                       <label for="total_calories">Total Kilo Calories Consumed per day</label>
+                                                      <span id="total-calories-error" class="error-message" style="color: red;"></span>                                                  </div>
                                                       <i class="fas fa-microphone voice-icon" onclick="startVoiceInput(document.getElementById('total_calories'))"></i>
-                                                 
-                                                  </div>
                                                   </div>
                                               </fieldset>
                                           </div>
@@ -762,9 +763,10 @@ select:focus:invalid {
                                                           <option value="Super Active">Super Active(Intense exercise 6-7 times/week)</option>
                                                           <option value="Extra Active">Extra Active (Very intense exercise or training twice a day)</option>
                                                       </select>
+                                                      <span id="activity-level-error" class="error-message" style="color: red;"></span>
                                                       <i class="fas fa-microphone voice-icon" onclick="startVoiceInputForSelect('activity_level')"></i>
-                                                  </div>
-                                              </div>
+                                                  </div>                                                 
+                                              </div>                 
                                             </fieldset>
                                         </div>
                                         <input type="hidden" id="current_date" name="current_date">
@@ -1050,28 +1052,28 @@ select:focus:invalid {
       }
   
       // Age validation (integer between 1 and 45)
-      if (age && (!Number.isInteger(Number(age)) || age <= 0 || age > 45)) {
+      if (age && (!Number.isInteger(Number(age)) || age <= 0 || age > 45 || isNaN(age))) {
         formIsValid = false;
         document.getElementById('age').style.borderColor = 'red';
         document.getElementById('age-error').textContent = "Please enter a valid integer for Age between 1 and 45.";
       }
   
       // Height validation (50 cm to 300 cm)
-      if (height && (height <= 0 || height < 50 || height > 300)) {
+      if (height && (height <= 0 || height < 50 || height > 300 || isNaN(height))) {
         formIsValid = false;
         document.getElementById('height').style.borderColor = 'red';
-        document.getElementById('height-error').textContent = "Height must be between 50 cm and 300 cm.";
+        document.getElementById('height-error').textContent = "Height must be a valid number between 50 cm and 300 cm.";
       }
   
       // Weight validation (2 kg to 500 kg)
-      if (weight && (weight <= 0 || weight < 2 || weight > 500)) {
+      if (weight && (weight <= 0 || weight < 2 || weight > 500 || isNaN(weight))) {
         formIsValid = false;
         document.getElementById('weight').style.borderColor = 'red';
-        document.getElementById('weight-error').textContent = "Weight must be between 2 kg and 500 kg.";
+        document.getElementById('weight-error').textContent = "Weight must be a valid number between 2 kg and 500 kg.";
       }
   
       // Total Calories validation (500 kcal to 5000 kcal)
-      if (totalCalories && (!Number.isInteger(Number(totalCalories)) || totalCalories < 100 || totalCalories > 5000)) {
+      if (totalCalories && (!Number.isInteger(Number(totalCalories)) || totalCalories < 100 || totalCalories > 5000 || isNaN(totalCalories))) {
         formIsValid = false;
         document.getElementById('total_calories').style.borderColor = 'red';
         document.getElementById('total-calories-error').textContent = "Total Calories must be an integer between 100 and 5000 kcal.";
